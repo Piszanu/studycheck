@@ -19,28 +19,23 @@
 <body class="bg-dark">
   <div class="container">
     <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Login</div>
+      <div class="card-header text-center">กรุณา Login เข้าสู่ระบบ</div>
       <div class="card-body">
-        <form>
+        <form action="" method="POST" id="loginform" onsubmit="CheckLogin(event);return false;">
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="Username">Username</label>
+            <input class="form-control" id="Username" type="text" aria-describedby="emailHelp" placeholder="Username" required>
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
+            <label for="Password">Password</label>
+            <input class="form-control" id="Password" type="password" placeholder="Password" required>
           </div>
-          <div class="form-group">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="checkbox"> Remember Password</label>
-            </div>
-          </div>
-          <a class="btn btn-primary btn-block" href="index.html">Login</a>
+          <input class="btn btn-primary btn-block" type="submit" value="Login เข้าสู่ระบบ">
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="register.html">Register an Account</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          <a class="d-block small mt-3">ระบบเช็ครายชื่อเข้าเรียน</a>
+          <!--<a class="d-block small mt-3" href="register.html">Register an Account</a>
+          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>-->
         </div>
       </div>
     </div>
@@ -48,8 +43,42 @@
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/sweetalert/sweetalert.min.js"></script>
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 </body>
+<script type="text/javascript">
+  $(window).on("load", function () {
+    if (typeof (Storage) !== "undefined") {
+      //
+    } else {
+      alert("Sorry! Your browser can't support Local storage!");
+    }
+  });
 
+  $( document ).ready(function() {
+      
+  });
+  
+  function CheckLogin(e){
+    //import {} from 'bootstrap';
+    //$('#loginform').validate();
+        e.preventDefault();
+        $.post("controller/checkLogin.php", {username: $('#Username').val(), password: $('#Password').val()}, function(result){
+            //alert(result);
+            if(result !== "Fail" && result !== undefined){
+              var teacher = JSON.parse(result);
+              localStorage.TEACHER_ID = teacher.TEACHER_ID;
+              localStorage.NAME = teacher.NAME;
+              localStorage.TEL = teacher.TEL;
+              localStorage.TYPE = teacher.TYPE;
+              window.location.replace('index.html');
+            }else{
+              //alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+              //$('#LoginfailModal').modal().show();
+              swal("ไม่สามารถเข้าสู่ระบบได้!", "Username หรือ Password ไม่ถูกต้อง! \n กรุณาตรวจสอบความถูกต้องใหม่.", "warning");
+            }
+        });
+      }
+</script>
 </html>

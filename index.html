@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
+  <title>Study Check - ระบบเช็ครายชื่อเข้าเรียน</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -21,45 +20,54 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand" href="index.html">Study Check ระบบเช็ครายชื่อเข้าเรียน</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="หน้าแรก">
           <a class="nav-link" href="index.html">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Dashboard</span>
+            <i class="fa fa-fw fa-home"></i>
+            <span class="nav-link-text">หน้าแรก</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.html">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Charts</span>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="จัดการข้อมูลวิชาเรียน">
+          <a class="nav-link" href="subjectManage.html">
+            <i class="fa fa-fw fa-graduation-cap"></i>
+            <span class="nav-link-text">จัดการข้อมูลวิชาเรียน</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="จัดการข้อมูลนักศึกษา">
+          <a class="nav-link" href="studentManage.html">
+            <i class="fa fa-fw fa-users"></i>
+            <span class="nav-link-text">จัดการข้อมูลนักศึกษา</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="จัดการเวลาการเรียนการสอน">
+          <a class="nav-link" href="classManage.html">
             <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Tables</span>
+            <span class="nav-link-text">จัดการเวลาการเรียนการสอน</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="รายงาน">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Components</span>
+            <i class="fa fa-fw fa-book"></i>
+            <span class="nav-link-text">รายงาน</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="navbar.html">Navbar</a>
+              <a href="report/enrollment.html">รายงานข้อมูลการเข้าเรียน</a>
             </li>
             <li>
-              <a href="cards.html">Cards</a>
+              <a href="report/student.html">รายงานข้อมูลนักศึกษา</a>
+            </li>
+            <li>
+              <a href="report/subject.html">รายงานข้อมูลรายวิชา</a>
             </li>
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+        <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">Example Pages</span>
@@ -115,7 +123,7 @@
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">Link</span>
           </a>
-        </li>
+        </li>-->
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
@@ -125,7 +133,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
+        <!--<li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-fw fa-envelope"></i>
             <span class="d-lg-none">Messages
@@ -201,18 +209,10 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item small" href="#">View all alerts</a>
           </div>
-        </li>
+        </li>-->
         <li class="nav-item">
-          <form class="form-inline my-2 my-lg-0 mr-lg-2">
-            <div class="input-group">
-              <input class="form-control" type="text" placeholder="Search for...">
-              <span class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-          </form>
+          <a class="nav-link" href="updateteacherinfo.html">
+            <i class="fa fa-fw fa-user-secret"></i>แก้ไขข้อมูลอาจารย์</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
@@ -226,9 +226,9 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
+          <a href="#">หน้าแรก</a>
         </li>
-        <li class="breadcrumb-item active">My Dashboard</li>
+        <li class="breadcrumb-item active">ข้อมูลการเรียนการสอน</li>
       </ol>
       <!-- Icon Cards-->
       <div class="row">
@@ -1081,7 +1081,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+          <small>Copyright © Study Check - ระบบเช็ครายชื่อเข้าเรียน 2018</small>
         </div>
       </div>
     </footer>
@@ -1094,15 +1094,15 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">คุณแน่ใจหรือว่าต้องการออกจากระบบ ?</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-body">คลิกที่ปุ่ม "Logout" เพื่อออกจากระบบ.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="login.html" id="btnLogout">Logout</a>
           </div>
         </div>
       </div>
@@ -1122,6 +1122,27 @@
     <script src="js/sb-admin-datatables.min.js"></script>
     <script src="js/sb-admin-charts.min.js"></script>
   </div>
-</body>
+  <script type="text/javascript">
+    $(window).on("load", function () {
+      if (typeof (Storage) !== "undefined") {
+        if(localStorage.TYPE !== undefined  && localStorage.TYPE === 'admin'){
+          window.location.replace("teacherManage.html");
+        }else if (localStorage.TYPE !== undefined && localStorage.TYPE === 'teacher') {
+          //window.location.replace("index.html");
+        }else{
+          window.location.replace("login.html");
+        }
+      } else {
+        alert("Sorry! Your browser can't support Local storage!");
+      }
+    });
 
+    $( document ).ready(function() {
+        $('#btnLogout').click(function(){
+          localStorage.clear();
+          window.location.replace("login.html");
+        });
+    });
+  </script>
+</body>
 </html>
