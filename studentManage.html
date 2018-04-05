@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Study Check - จัดการข้อมูลวิชาเรียน</title>
+  <title>Study Check - จัดการข้อมูลนักศึกษา</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -42,13 +42,13 @@
             <span class="nav-link-text">หน้าแรก</span>
           </a>
         </li>
-        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="จัดการข้อมูลวิชาเรียน">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="จัดการข้อมูลรายวิชา">
           <a class="nav-link" href="subjectManage.html">
             <i class="fa fa-fw fa-graduation-cap"></i>
-            <span class="nav-link-text">จัดการข้อมูลวิชาเรียน</span>
+            <span class="nav-link-text">จัดการข้อมูลรายวิชา</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="จัดการข้อมูลนักศึกษา">
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="จัดการข้อมูลนักศึกษา">
           <a class="nav-link" href="studentManage.html">
             <i class="fa fa-fw fa-users"></i>
             <span class="nav-link-text">จัดการข้อมูลนักศึกษา</span>
@@ -238,12 +238,12 @@
         <li class="breadcrumb-item">
           <a href="#">การจัดการ</a>
         </li>
-        <li class="breadcrumb-item active">จัดการข้อมูลวิชาเรียน</li>
+        <li class="breadcrumb-item active">จัดการข้อมูลนักศึกษา</li>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> ข้อมูลรายวิชาทั้งหมด
+          <i class="fa fa-table"></i> ข้อมูลรายนักศึกษาทั้งหมด
           <div class="pull-right">
             <button class="btn btn-success" id="btnAdd">
               <i class="fa fa-user-plus"></i> เพิ่ม </button>
@@ -258,11 +258,14 @@
             <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>Subject ID</th>
-                  <th>รหัสวิชา</th>
-                  <th>ชื่อวิชา</th>
-                  <th>อาจารย์ผู้สอน</th>
-                  <th>Teacher ID</th>
+                  <th>STUDEN_ID</th>
+                  <th>รหัสนักศึกษา</th>
+                  <th>ชื่อนักศึกษา</th>
+                  <th>ที่อยู่</th>
+                  <th>เบอร์โทรศัพท์</th>
+                  <th>เพศ</th>
+                  <th>อายุ</th>
+                  <th>หมู่เลือด</th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -309,28 +312,46 @@
           <div class="modal-content">
             <form id="manageform">
               <div class="modal-header">
-                <h5 class="modal-title" id="manageModalLabel">เพิ่มข้อมูลรายวิชาเรียน</h5>
+                <h5 class="modal-title" id="manageModalLabel">เพิ่มข้อมูลนักศึกษา</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
-              <div class="modal-body">
-                <input type="hidden" id="id" name="id"/>
+            <div class="modal-body">
+                <input type="hidden" id="id" name="id" />
                 <div class="form-group">
-                  <label for="subjectname">ชื่อวิชา</label>
-                  <input class="form-control" id="subjectname" name="subjectname" type="text" aria-describedby="subjectname" placeholder="ชื่อวิชา" required>
+                    <label for="studentcode">รหัสนักศึกษา</label>
+                    <input class="form-control" id="studentcode" name="studentcode" type="text" aria-describedby="studentcode" placeholder="รหัสนักศึกษา"
+                        required>
                 </div>
                 <div class="form-group">
-                  <label for="subjectcode">รหัสวิชา</label>
-                  <input class="form-control" id="subjectcode" name="subjectcode" type="text" aria-describedby="subjectcode" placeholder="รหัสวิชา" required>
+                    <label for="name">ชื่อนักศึกษา</label>
+                    <input class="form-control" id="name" name="name" type="text" aria-describedby="name" placeholder="ชื่อนักศึกษา" required>
                 </div>
                 <div class="form-group">
-                  <label for="teacherSelect">อาจารย์ผู้สอน</label>
-                  <select class="form-control" id="teacherSelect" name="teacherSelect">
-                    
-                  </select>
+                    <label for="address">ที่อยู่</label>
+                    <textarea class="form-control" id="address" name="address" type="text" aria-describedby="address" placeholder="ที่อยู่" required></textarea>
                 </div>
-              </div>
+                <div class="form-group">
+                    <label for="tel">เบอร์โทรศัพท์</label>
+                    <input class="form-control" id="tel" name="tel" type="tel" aria-describedby="tel" placeholder="เบอร์โทรศัพท์" required>
+                </div>
+                <div class="form-group">
+                    <label for="sexSelect">เพศ</label>
+                    <select class="form-control" id="sexSelect" name="sexSelect">
+                        <option value="male">ชาย</option>
+                        <option value="female">หญิง</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="age">อายุ</label>
+                    <input class="form-control" id="age" name="age" type="number" aria-describedby="age" placeholder="อายุ" required>
+                </div>
+                <div class="form-group">
+                  <label for="bloodgroup">หมู่เลือด</label>
+                  <input class="form-control" id="bloodgroup" name="bloodgroup" type="text" aria-describedby="bloodgroup" placeholder="หมู่เลือด" required>
+                </div>
+            </div>
               <div class="modal-footer">
                 <button class="btn btn-danger" type="button" data-dismiss="modal">
                   <i class="fa fa-window-close"></i> Cancel</button>
@@ -362,7 +383,6 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-datatables.min.js"></script>
     <script src="vendor/sweetalert/sweetalert.min.js"></script>
     <!--<script src="js/sb-admin-charts.min.js"></script>-->
   </div>
@@ -392,26 +412,26 @@
 
     $(document).ready(function () {
       $('.bgloading').css('display', 'none');
-      $('#teacherSelect').append($("<option></option>").attr("value",localStorage.TEACHER_ID).text(localStorage.NAME)); 
+      //$('#teacherSelect').append($("<option></option>").attr("value",localStorage.TEACHER_ID).text(localStorage.NAME)); 
       var myTable = $('#dataTable').DataTable({
+        dom: 'Bfrtip',
         destroy: true,
         "processing": true,
         "ordering": true,
-        "info": true,
-        "scrollX": false,
         select: true,
-        lengthChange: false,
-        "dom": 'Bfrtip',
         "ajax": {
-          "url": "controller/getSubject.php",
+          "url": "controller/getStudent.php",
           "type": "GET"
         },
         "columns": [
-          { "data": 'SUBJECT_ID', "visible": false },
-          { "data": 'SUBJECT_CODE' },
-          { "data": 'SUBJECT_NAME' },
+          { "data": 'STUDEN_ID', "visible": false },
+          { "data": 'STUDEN_CODE' },
           { "data": 'NAME' },
-          { "data": 'TEACHER_CODE', "visible": false }
+          { "data": 'ADDRESS' },
+          { "data": 'TEL' },
+          { "data": 'SEX' },
+          { "data": 'AGE' },
+          { "data": 'BLOOD_TYPE' },
         ],
         buttons: [
           { "extend": 'copy', "text": 'Copy', "className": 'btn btn-primary btn-sm' },
@@ -457,17 +477,22 @@
 
       $('#btnAdd').click(function () {
         sessionStorage.manage = "add";
-        $('#manageModalLabel').text('เพิ่มข้อมูลรายวิชาเรียน');
+        $('#manageModalLabel').text('เพิ่มข้อมูลรายนักศึกษา');
         $('#id').val('');
-        $('#subjectname').val('');
-        $('#subjectcode').val('');
+        $('#studentcode').val('');
+        $('#name').val('');
+        $('#address').val('');
+        $('#tel').val('');
+        $('#sexSelect').val('male');
+        $('#age').val('');
+        $('#bloodgroup').val('');
         $('#manageModal').modal('show');
       });
 
       $('#btnDelete').click(function () {
         swal({
           title: "ยืนยันการลบ?",
-          text: "คุณต้องการลบข้อมูลรายวิชา " + myTable.rows('.selected').data()[0]['SUBJECT_NAME'] + " ใช่หรือไม่?",
+          text: "คุณต้องการลบข้อมูลรายนักศึกษา " + myTable.rows('.selected').data()[0]['NAME'] + " ใช่หรือไม่?",
           icon: "warning",
           buttons: true,
           dangerMode: true,
@@ -475,12 +500,12 @@
           .then((willDelete) => {
             if (willDelete) {
               $('.bgloading').css('display', 'block');
-              $.post("controller/deleteSubject.php", { id: myTable.rows('.selected').data()[0]['SUBJECT_ID']},
+              $.post("controller/deleteStudent.php", { id: myTable.rows('.selected').data()[0]['STUDEN_ID']},
                 function (data, status) {
                   //alert("Data: " + data + "\nStatus: " + status);
                   if (data === "Success") {
                     $('.bgloading').css('display', 'none');
-                    swal("ลบข้อมูลสำเร็จ!", "ลบข้อมูลรายวิชาเรียนสำเร็จ.", "success")
+                    swal("ลบข้อมูลสำเร็จ!", "ลบข้อมูลรายนักศึกษาสำเร็จ.", "success")
                       .then((value) => {
                         location.reload();
                       });
@@ -497,10 +522,15 @@
 
       $('#btnEdit').click(function () {
         sessionStorage.manage = "edit";
-        $('#manageModalLabel').text('แก้ไขข้อมูลรายวิชาเรียน');
-        $('#id').val(myTable.rows('.selected').data()[0]['SUBJECT_ID']);
-        $('#subjectname').val(myTable.rows('.selected').data()[0]['SUBJECT_NAME']);
-        $('#subjectcode').val(myTable.rows('.selected').data()[0]['SUBJECT_CODE']);
+        $('#manageModalLabel').text('แก้ไขข้อมูลรายนักศึกษา');
+        $('#id').val(myTable.rows('.selected').data()[0]['STUDEN_ID']);
+        $('#studentcode').val(myTable.rows('.selected').data()[0]['STUDEN_CODE']);
+        $('#name').val(myTable.rows('.selected').data()[0]['NAME']);
+        $('#address').val(myTable.rows('.selected').data()[0]['ADDRESS']);
+        $('#tel').val(myTable.rows('.selected').data()[0]['TEL']);
+        $('#sexSelect').val(myTable.rows('.selected').data()[0]['SEX']);
+        $('#age').val(myTable.rows('.selected').data()[0]['AGE']);
+        $('#bloodgroup').val(myTable.rows('.selected').data()[0]['BLOOD_TYPE']);
         $('#manageModal').modal('show');
       });
 
@@ -511,12 +541,12 @@
         $('#manageModal').modal('hide');
 
         if (sessionStorage.manage === "add") {
-          $.post("controller/addSubject.php", $('#manageform').serializeArray(),
+          $.post("controller/addStudent.php", $('#manageform').serializeArray(),
             function (data, status) {
               //alert("Data: " + data + "\nStatus: " + status);
               if (data === "Success") {
                 $('.bgloading').css('display', 'none');
-                swal("บันทึกข้อมูลสำเร็จ!", "บันทึกข้อมูลรายวิชาเรียนสำเร็จ.", "success")
+                swal("บันทึกข้อมูลสำเร็จ!", "บันทึกข้อมูลนักศึกษาสำเร็จ.", "success")
                   .then((value) => {
                     location.reload();
                   });
@@ -529,12 +559,12 @@
               }
             });
         }else if (sessionStorage.manage === "edit") {
-          $.post("controller/editSubject.php", $('#manageform').serializeArray(),
+          $.post("controller/editStudent.php", $('#manageform').serializeArray(),
             function (data, status) {
               //alert("Data: " + data + "\nStatus: " + status);
               if (data === "Success") {
                 $('.bgloading').css('display', 'none');
-                swal("บันทึกข้อมูลสำเร็จ!", "บันทึกข้อมูลรายวิชาเรียนสำเร็จ.", "success")
+                swal("บันทึกข้อมูลสำเร็จ!", "บันทึกข้อมูลนักศึกษาสำเร็จ.", "success")
                   .then((value) => {
                     location.reload();
                   });

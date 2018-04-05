@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,13 +18,20 @@
   <link href="css/sb-admin.css" rel="stylesheet">
   <link href="vendor/datatables/Select-1.2.5/css/select.bootstrap4.min.css" rel="stylesheet">
   <link href="vendor/datatables/Responsive-2.2.1/css/responsive.bootstrap4.min.css" rel="stylesheet">
+  <link href="css/loading.css" rel="stylesheet">
+  <link href="vendor/datatables/Buttons-1.5.1/css/buttons.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!--CSS Spinner-->
+    <div class="bgloading">
+        <div class="loading"></div>
+    </div>
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">Study Check ระบบเช็ครายชื่อเข้าเรียน</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -235,14 +243,17 @@
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> ข้อมูลอาจารย์ทั้งหมด 
+          <i class="fa fa-table"></i> ข้อมูลอาจารย์ทั้งหมด
           <div class="pull-right">
-                <button class="btn btn-success" id="btnAdd"><i class="fa fa-user-plus"></i> เพิ่ม </button> 
-                <button class="btn btn-primary" id="btnEdit" disabled><i class="fa fa-edit"></i> แก้ไข </button>  
-                <button class="btn btn-danger" id="btnDelete" disabled><i class="fa fa-trash"></i> ลบ </button>  
+            <button class="btn btn-success" id="btnAdd">
+              <i class="fa fa-user-plus"></i> เพิ่ม </button>
+            <button class="btn btn-primary" id="btnEdit" disabled>
+              <i class="fa fa-edit"></i> แก้ไข </button>
+            <button class="btn btn-danger" id="btnDelete" disabled>
+              <i class="fa fa-trash"></i> ลบ </button>
           </div>
         </div>
-        <div class="card-body">        
+        <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
               <thead>
@@ -258,7 +269,7 @@
             </table>
           </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        <div class="card-footer small text-muted" id="dateTime">Updated yesterday at 11:59 PM</div>
       </div>
     </div>
     <!-- /.container-fluid-->
@@ -292,6 +303,53 @@
         </div>
       </div>
     </div>
+    <!-- Manage Modal-->
+    <div class="modal fade" id="manageModal" tabindex="-1" role="dialog" aria-labelledby="manageModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form id="manageform">
+            <div class="modal-header">
+              <h5 class="modal-title" id="manageModalLabel">เพิ่มข้อมูลอาจารย์ผู้สอน</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="id" name="id"/>
+              <div class="form-group">
+                <label for="name">ชื่อ</label>
+                <input class="form-control" id="name" name="name" type="text" aria-describedby="Name" placeholder="ชื่อ" required>
+              </div>
+              <div class="form-group">
+                <label for="tel">เบอร์โทรศัพท์</label>
+                <input class="form-control" id="tel" name="tel" type="tel" aria-describedby="TelaphonNumber" placeholder="เบอร์โทรศัพท์" required>
+              </div>
+              <div class="form-group">
+                <label for="typeSelect">ประเภทผู้ใช้งาน</label>
+                <select class="form-control" id="typeSelect" name="typeSelect">
+                  <option value="teacher">อาจารย์</option>
+                  <option value="admin">ผู้ดูแลระบบ</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input class="form-control" id="username" name="username" type="text" placeholder="Username" required>
+              </div>
+              <div class="form-group">
+                <label for="Password">Password</label>
+                <input class="form-control" id="Password" name="Password" type="password" placeholder="Password" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger" type="button" data-dismiss="modal">
+                <i class="fa fa-window-close"></i> Cancel</button>
+              <button class="btn btn-success" type="submit" value="" id="btnSave">
+                <i class="fa fa-save"></i> Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -303,68 +361,213 @@
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <script src="vendor/datatables/Select-1.2.5/js/dataTables.select.min.js"></script>
     <script src="vendor/datatables/Responsive-2.2.1/js/dataTables.responsive.min.js"></script>
+    <script src="vendor/datatables/Buttons-1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src="vendor/datatables/Buttons-1.5.1/js/buttons.bootstrap4.min.js"></script>
+    <script src="vendor/datatables/JSZip-2.5.0/jszip.min.js"></script>
+    <script src="vendor/datatables/pdfmake-0.1.32/pdfmake.min.js"></script>
+    <script src="vendor/datatables/vfs_fonts.js"></script>
+    <script src="vendor/datatables/Buttons-1.5.1/js/buttons.html5.min.js"></script>
+    <script src="vendor/datatables/Buttons-1.5.1/js/buttons.print.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
-    <!--<script src="js/sb-admin-charts.min.js"></script>-->
+  <script src="vendor/sweetalert/sweetalert.min.js"></script>
+  <!--<script src="js/sb-admin-charts.min.js"></script>-->
   </div>
+
   <script type="text/javascript">
     $(window).on("load", function () {
       if (typeof (Storage) !== "undefined") {
-        if(localStorage.TYPE !== undefined  && localStorage.TYPE === 'admin'){
-            //window.location.replace("teacherManage.html");
-        }else if (localStorage.TYPE !== undefined && localStorage.TYPE === 'teacher') {
-            window.location.replace("index.html");
-        }else{
+        if (localStorage.TYPE !== undefined && localStorage.TYPE === 'admin') {
+          //window.location.replace("teacherManage.html");
+        } else if (localStorage.TYPE !== undefined && localStorage.TYPE === 'teacher') {
+          window.location.replace("index.html");
+        } else {
           window.location.replace("login.html");
         }
       } else {
         alert("Sorry! Your browser can't support Local storage!");
       }
     });
+    
+    pdfMake.fonts = {
+        THSarabun: {
+          normal: 'THSarabun.ttf',
+          bold: 'THSarabun-Bold.ttf',
+          italics: 'THSarabun-Italic.ttf',
+          bolditalics: 'THSarabun-BoldItalic.ttf'
+        }
+      }
 
     $(document).ready(function () {
-            var myTable = $('#dataTable').DataTable({
-                destroy: true,
-                "processing": true,
-                "ordering": true,
-                "info": true,
-                "scrollX": false,
-                "ajax": {
-                    "url": "controller/getTeacher.php",
-                    "type": "GET"
-                },
-                "columns": [
-                    { "data": 'TEACHER_ID' },
-                    { "data": 'NAME' },
-                    { "data": 'USERNAME' },
-                    { "data": 'TEL' },
-                    { "data": 'TYPE' }
-                ],
-                "rowCallback": function (row, data) {
+      $('.bgloading').css('display', 'none');
+      var myTable = $('#dataTable').DataTable({
+        destroy: true,
+        "processing": true,
+        "ordering": true,
+        "info": true,
+        "scrollX": false,
+        select: true,
+        lengthChange: false,
+        "dom": 'Bfrtip',
+        "ajax": {
+          "url": "controller/getTeacher.php",
+          "type": "GET"
+        },
+        "columns": [
+          { "data": 'TEACHER_ID' },
+          { "data": 'NAME' },
+          { "data": 'USERNAME' },
+          { "data": 'TEL' },
+          { "data": 'TYPE' },
+          { "data": 'PASSWORD', "visible": false }
+        ],
+        buttons: [
+          {"extend": 'copy', "text":'Copy',"className": 'btn btn-primary btn-sm'},
+          {"extend": 'csv', "text":'CSV',"className": 'btn btn-danger btn-sm'},
+          {"extend": 'excel', "text":'Excel',"className": 'btn btn-success btn-sm'},
+          { // กำหนดพิเศษเฉพาะปุ่ม pdf
+                "extend": 'pdf', // ปุ่มสร้าง pdf ไฟล์
+                "text": 'PDF', // ข้อความที่แสดง
+                "className": 'btn btn-warning btn-sm',
+                "pageSize": 'A4',   // ขนาดหน้ากระดาษเป็น A4            
+                "customize":function(doc){ // ส่วนกำหนดเพิ่มเติม ส่วนนี้จะใช้จัดการกับ pdfmake
+                    // กำหนด style หลัก
+                    doc.defaultStyle = {
+                        font:'THSarabun',
+                        fontSize:16                                 
+                    };
                 }
-            });
+            },
+          {"extend": 'print', "text":'Print',"className": 'btn btn-default btn-sm'}
+        ]
+      });
 
-            $('#btnLogout').click(function () {
-                localStorage.clear();
-                window.location.replace("login.html");
-            });
+      $('#dateTime').text(Date());
 
-            $('#dataTable tbody').on('click', 'tr', function () {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                    $('#btnEdit').prop('disabled', true);
-                    $('#btnDelete').prop('disabled', true);
-                }
-                else {
-                    myTable.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                    $('#btnEdit').prop('disabled', false);
-                    $('#btnDelete').prop('disabled', false);
-                }
+      $('#btnLogout').click(function () {
+        localStorage.clear();
+        window.location.replace("login.html");
+      });
+
+      $('#dataTable tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+          $(this).removeClass('selected');
+          $('#btnEdit').prop('disabled', true);
+          $('#btnDelete').prop('disabled', true);
+        }
+        else {
+          myTable.$('tr.selected').removeClass('selected');
+          $(this).addClass('selected');
+          $('#btnEdit').prop('disabled', false);
+          $('#btnDelete').prop('disabled', false);
+        }
+      });
+
+      $('#btnAdd').click(function () {
+        sessionStorage.manage = "add";
+        $('#manageModalLabel').text('เพิ่มข้อมูลอาจารย์ผู้สอน');
+        $('#id').val('');
+        $('#name').val('');
+        $('#tel').val('');
+        $('#typeSelect').val('');
+        $('#username').val('');
+        $('#Password').val('');
+        $('#manageModal').modal('show');
+      });
+
+      $('#btnDelete').click(function () {
+        swal({
+          title: "ยืนยันการลบ?",
+          text: "คุณต้องการลบข้อมูลของ " + myTable.rows('.selected').data()[0]['NAME'] + " ใช่หรือไม่?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+          .then((willDelete) => {
+            if (willDelete) {
+              $('.bgloading').css('display', 'block');
+              $.post("controller/deleteTeacher.php", { id: myTable.rows('.selected').data()[0]['TEACHER_ID']},
+                function (data, status) {
+                  //alert("Data: " + data + "\nStatus: " + status);
+                  if (data === "Success") {
+                    $('.bgloading').css('display', 'none');
+                    swal("ลบข้อมูลสำเร็จ!", "ลบข้อมูลอาจารย์สำเร็จ.", "success")
+                      .then((value) => {
+                        location.reload();
+                      });
+                  } else {
+                    $('.bgloading').css('display', 'none');
+                    swal("ไม่สามารถลบข้อมูลได้!", "Error : " + data, "danger");
+                  }
+                });
+            } else {
+              swal("ยกเลิกการลบข้อมูล!");
+            }
+          });
+      });
+
+      $('#btnEdit').click(function () {
+        sessionStorage.manage = "edit";
+        $('#manageModalLabel').text('แก้ไขข้อมูลอาจารย์ผู้สอน');
+        $('#id').val(myTable.rows('.selected').data()[0]['TEACHER_ID']);
+        $('#name').val(myTable.rows('.selected').data()[0]['NAME']);
+        $('#tel').val(myTable.rows('.selected').data()[0]['TEL']);
+        $('#typeSelect').val(myTable.rows('.selected').data()[0]['TYPE']);
+        $('#username').val(myTable.rows('.selected').data()[0]['USERNAME']);
+        $('#Password').val(myTable.rows('.selected').data()[0]['PASSWORD']);
+        $('#manageModal').modal('show');
+      });
+
+      $('#manageform').submit(function (e) {
+        e.preventDefault();
+        //alert("seved");
+        $('.bgloading').css('display', 'block');        
+        $('#manageModal').modal('hide');
+
+        if (sessionStorage.manage === "add") {
+          $.post("controller/addTeacher.php", $('#manageform').serializeArray(),
+            function (data, status) {
+              //alert("Data: " + data + "\nStatus: " + status);
+              if (data === "Success") {
+                $('.bgloading').css('display', 'none');
+                swal("บันทึกข้อมูลสำเร็จ!", "บันทึกข้อมูลอาจารย์สำเร็จ.", "success")
+                  .then((value) => {
+                    location.reload();
+                  });
+              } else {
+                $('.bgloading').css('display', 'none');
+                swal("ไม่สามารถบันทึกข้อมูลได้!", "Error : " + data, "danger")
+                  .then((value) => {
+                    $('#manageModal').modal('show');
+                  });
+              }
             });
-        });
+        }else if (sessionStorage.manage === "edit") {
+          $.post("controller/editTeacher.php", $('#manageform').serializeArray(),
+            function (data, status) {
+              //alert("Data: " + data + "\nStatus: " + status);
+              if (data === "Success") {
+                $('.bgloading').css('display', 'none');
+                swal("บันทึกข้อมูลสำเร็จ!", "บันทึกข้อมูลอาจารย์สำเร็จ.", "success")
+                  .then((value) => {
+                    location.reload();
+                  });
+              } else {
+                $('.bgloading').css('display', 'none');
+                swal("ไม่สามารถบันทึกข้อมูลได้!", "Error : " + data, "danger")
+                  .then((value) => {
+                    $('#manageModal').modal('show');
+                  });
+              }
+            });
+        }else{
+          swal("Session Error!", "Not found Manage type", "danger");
+        }
+      });
+    });
   </script>
 </body>
+
 </html>
