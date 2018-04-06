@@ -511,7 +511,7 @@
                       });
                   } else {
                     $('.bgloading').css('display', 'none');
-                    swal("ไม่สามารถลบข้อมูลได้!", "Error : " + data, "danger");
+                    swal("ไม่สามารถลบข้อมูลได้!", "Error : " + data, "error");
                   }
                 });
             } else {
@@ -552,7 +552,7 @@
                   });
               } else {
                 $('.bgloading').css('display', 'none');
-                swal("ไม่สามารถบันทึกข้อมูลได้!", "Error : " + data, "danger")
+                swal("ไม่สามารถบันทึกข้อมูลได้!", "Error : " + data, "error")
                   .then((value) => {
                     $('#manageModal').modal('show');
                   });
@@ -570,14 +570,14 @@
                   });
               } else {
                 $('.bgloading').css('display', 'none');
-                swal("ไม่สามารถบันทึกข้อมูลได้!", "Error : " + data, "danger")
+                swal("ไม่สามารถบันทึกข้อมูลได้!", "Error : " + data, "error")
                   .then((value) => {
                     $('#manageModal').modal('show');
                   });
               }
             });
         }else{
-          swal("Session Error!", "Not found Manage type", "danger");
+          swal("Session Error!", "Not found Manage type", "error");
         }
       });
     });

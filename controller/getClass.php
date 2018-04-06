@@ -1,9 +1,10 @@
 <?php
 require_once("mysqlConn.php");
 
-$sql = "SELECT class.CLASS_ID, subject.SUBJECT_CODE, subject.SUBJECT_NAME, teacher.NAME, class.DATE, class.TIME, class.STATUS
+$sql = "SELECT class.CLASS_ID, subject.SUBJECT_CODE, subject.SUBJECT_NAME, subject.TEACHER_CODE, teacher.NAME, DATE_FORMAT(class.DATE,'%d/%m/%Y') DATE, 
+DATE_FORMAT(class.TIME,'%H:%i') TIME, class.STATUS
 FROM class
-LEFT JOIN subject ON subject.SUBJECT_ID = class.SUBJECT_ID
+LEFT JOIN subject ON subject.SUBJECT_CODE = class.SUBJECT_ID
 LEFT JOIN teacher ON teacher.TEACHER_ID = subject.TEACHER_CODE";
 $result = $conn->query($sql);
 
