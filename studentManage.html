@@ -54,6 +54,12 @@
             <span class="nav-link-text">จัดการข้อมูลนักศึกษา</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="จัดการข้อมูลนักศึกษา">
+          <a class="nav-link" href="studentInClass.html">
+            <i class="fa fa-fw fa-building"></i>
+            <span class="nav-link-text">ผูกวิชากับนักศึกษา</span>
+          </a>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="จัดการเวลาการเรียนการสอน">
           <a class="nav-link" href="classManage.html">
             <i class="fa fa-fw fa-table"></i>
@@ -243,7 +249,7 @@
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> ข้อมูลรายนักศึกษาทั้งหมด
+          <i class="fa fa-table"></i> ข้อมูลนักศึกษาทั้งหมด
           <div class="pull-right">
             <button class="btn btn-success" id="btnAdd">
               <i class="fa fa-user-plus"></i> เพิ่ม </button>
@@ -522,7 +528,7 @@
 
       $('#btnEdit').click(function () {
         sessionStorage.manage = "edit";
-        $('#manageModalLabel').text('แก้ไขข้อมูลรายนักศึกษา');
+        $('#manageModalLabel').text('แก้ไขข้อมูลนักศึกษา');
         $('#id').val(myTable.rows('.selected').data()[0]['STUDEN_ID']);
         $('#studentcode').val(myTable.rows('.selected').data()[0]['STUDEN_CODE']);
         $('#name').val(myTable.rows('.selected').data()[0]['NAME']);

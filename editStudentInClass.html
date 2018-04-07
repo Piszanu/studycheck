@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Study Check - จัดการข้อมูลนักศึกษา</title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="vendor/datatables/Select-1.2.5/css/select.bootstrap4.min.css" rel="stylesheet">
+    <link href="vendor/datatables/Responsive-2.2.1/css/responsive.bootstrap4.min.css" rel="stylesheet">
+    <link href="css/loading.css" rel="stylesheet">
+    <link href="vendor/datatables/Buttons-1.5.1/css/buttons.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!--CSS Spinner-->
+    <div class="bgloading">
+        <div class="loading"></div>
+    </div>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" href="index.html">Study Check ระบบเช็ครายชื่อเข้าเรียน</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="หน้าแรก">
+                    <a class="nav-link" href="index.html">
+                        <i class="fa fa-fw fa-home"></i>
+                        <span class="nav-link-text">หน้าแรก</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="จัดการข้อมูลรายวิชา">
+                    <a class="nav-link" href="subjectManage.html">
+                        <i class="fa fa-fw fa-graduation-cap"></i>
+                        <span class="nav-link-text">จัดการข้อมูลรายวิชา</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="จัดการข้อมูลนักศึกษา">
+                    <a class="nav-link" href="studentManage.html">
+                        <i class="fa fa-fw fa-users"></i>
+                        <span class="nav-link-text">จัดการข้อมูลนักศึกษา</span>
+                    </a>
+                </li>
+                <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="จัดการข้อมูลนักศึกษา">
+                    <a class="nav-link" href="studentInClass.html">
+                        <i class="fa fa-fw fa-building"></i>
+                        <span class="nav-link-text">ผูกวิชากับนักศึกษา</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="จัดการเวลาการเรียนการสอน">
+                    <a class="nav-link" href="classManage.html">
+                        <i class="fa fa-fw fa-table"></i>
+                        <span class="nav-link-text">จัดการเวลาการเรียนการสอน</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="รายงาน">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-book"></i>
+                        <span class="nav-link-text">รายงาน</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseComponents">
+                        <li>
+                            <a href="report/enrollment.html">รายงานข้อมูลการเข้าเรียน</a>
+                        </li>
+                        <li>
+                            <a href="report/student.html">รายงานข้อมูลนักศึกษา</a>
+                        </li>
+                        <li>
+                            <a href="report/subject.html">รายงานข้อมูลรายวิชา</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text">Example Pages</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+            <li>
+              <a href="login.html">Login Page</a>
+            </li>
+            <li>
+              <a href="register.html">Registration Page</a>
+            </li>
+            <li>
+              <a href="forgot-password.html">Forgot Password Page</a>
+            </li>
+            <li>
+              <a href="blank.html">Blank Page</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-sitemap"></i>
+            <span class="nav-link-text">Menu Levels</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseMulti">
+            <li>
+              <a href="#">Second Level Item</a>
+            </li>
+            <li>
+              <a href="#">Second Level Item</a>
+            </li>
+            <li>
+              <a href="#">Second Level Item</a>
+            </li>
+            <li>
+              <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third Level</a>
+              <ul class="sidenav-third-level collapse" id="collapseMulti2">
+                <li>
+                  <a href="#">Third Level Item</a>
+                </li>
+                <li>
+                  <a href="#">Third Level Item</a>
+                </li>
+                <li>
+                  <a href="#">Third Level Item</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+          <a class="nav-link" href="#">
+            <i class="fa fa-fw fa-link"></i>
+            <span class="nav-link-text">Link</span>
+          </a>
+        </li>-->
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-fw fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <!--<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-envelope"></i>
+            <span class="d-lg-none">Messages
+              <span class="badge badge-pill badge-primary">12 New</span>
+            </span>
+            <span class="indicator text-primary d-none d-lg-block">
+              <i class="fa fa-fw fa-circle"></i>
+            </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+            <h6 class="dropdown-header">New Messages:</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <strong>David Miller</strong>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome! These messages clip off when they reach the end of the box so they don't overflow over to the sides!</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <strong>Jane Smith</strong>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">I was wondering if you could meet for an appointment at 3:00 instead of 4:00. Thanks!</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <strong>John Doe</strong>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">I've sent the final files over to you for review. When you're able to sign off of them let me know and we can discuss distribution.</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item small" href="#">View all messages</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-bell"></i>
+            <span class="d-lg-none">Alerts
+              <span class="badge badge-pill badge-warning">6 New</span>
+            </span>
+            <span class="indicator text-warning d-none d-lg-block">
+              <i class="fa fa-fw fa-circle"></i>
+            </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+            <h6 class="dropdown-header">New Alerts:</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <span class="text-success">
+                <strong>
+                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
+              </span>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <span class="text-danger">
+                <strong>
+                  <i class="fa fa-long-arrow-down fa-fw"></i>Status Update</strong>
+              </span>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <span class="text-success">
+                <strong>
+                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
+              </span>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item small" href="#">View all alerts</a>
+          </div>
+        </li>-->
+                <li class="nav-item">
+                    <a class="nav-link" href="updateteacherinfo.html">
+                        <i class="fa fa-fw fa-user-secret"></i>แก้ไขข้อมูลอาจารย์</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">การจัดการ</a>
+                </li>
+                <li class="breadcrumb-item active">จัดการข้อมูลนักศึกษา</li>
+            </ol>
+            <!-- Example DataTables Card-->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> <span id="tbhead"></span>
+                    <div class="pull-right">
+                        <button class="btn btn-success" id="btnAdd">
+                            <i class="fa fa-user-plus"></i> เพิ่ม </button>
+                        <button class="btn btn-danger" id="btnDelete" disabled>
+                            <i class="fa fa-trash"></i> ลบ </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>CLASS_ID</th>
+                                    <th>รหัสนักศึกษา</th>
+                                    <th>ชื่อนักศึกษา</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer small text-muted" id="dateTime">Updated yesterday at 11:59 PM</div>
+            </div>
+        </div>
+        <!-- /.container-fluid-->
+        <!-- /.content-wrapper-->
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright © Study Check - ระบบเช็ครายชื่อเข้าเรียน 2018</small>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">คุณแน่ใจหรือว่าต้องการออกจากระบบ ?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">คลิกที่ปุ่ม "Logout" เพื่อออกจากระบบ.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html" id="btnLogout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Manage Modal-->
+        <div class="modal fade" id="manageModal" tabindex="-1" role="dialog" aria-labelledby="manageModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="manageModalLabel">เพิ่มนักศึกษา</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive">
+                            <form id="searchform">
+                                <div class="form-group">
+                                    <label for="studentsearch">ค้นหาจากชื่อหรือรหัสนักศึกษา</label>
+                                    <div class="input-group">
+                                        <input class="form-control" id="studentsearch" name="studentsearch" type="text" aria-describedby="studentsearch" placeholder="ชื่อ/นักศึกษา"/>
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fa fa-search"></i> ค้นหา</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                            <table class="table table-bordered table-hover" id="selectTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>STUDEN_ID</th>
+                                        <th>รหัสนักศึกษา</th>
+                                        <th>ชื่อนักศึกษา</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" type="button" data-dismiss="modal">
+                            <i class="fa fa-window-close"></i> Cancel</button>
+                        <button class="btn btn-success" type="button" value="" id="btnSave">
+                            <i class="fa fa-save"></i> Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Page level plugin JavaScript-->
+        <!--<script src="vendor/chart.js/Chart.min.js"></script>-->
+        <script src="vendor/datatables/jquery.dataTables.js"></script>
+        <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+        <script src="vendor/datatables/Select-1.2.5/js/dataTables.select.min.js"></script>
+        <script src="vendor/datatables/Responsive-2.2.1/js/dataTables.responsive.min.js"></script>
+        <script src="vendor/datatables/Buttons-1.5.1/js/dataTables.buttons.min.js"></script>
+        <script src="vendor/datatables/Buttons-1.5.1/js/buttons.bootstrap4.min.js"></script>
+        <script src="vendor/datatables/JSZip-2.5.0/jszip.min.js"></script>
+        <script src="vendor/datatables/pdfmake-0.1.32/pdfmake.min.js"></script>
+        <script src="vendor/datatables/vfs_fonts.js"></script>
+        <script src="vendor/datatables/Buttons-1.5.1/js/buttons.html5.min.js"></script>
+        <script src="vendor/datatables/Buttons-1.5.1/js/buttons.print.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin.min.js"></script>
+        <!-- Custom scripts for this page-->
+        <script src="vendor/sweetalert/sweetalert.min.js"></script>
+        <!--<script src="js/sb-admin-charts.min.js"></script>-->
+    </div>
+    <script type="text/javascript">
+        $(window).on("load", function () {
+            if (typeof (Storage) !== "undefined") {
+                if (localStorage.TYPE !== undefined && localStorage.TYPE === 'admin') {
+                    window.location.replace("teacherManage.html");
+                } else if (localStorage.TYPE !== undefined && localStorage.TYPE === 'teacher') {
+                    //window.location.replace("index.html");
+                } else {
+                    window.location.replace("login.html");
+                }
+            } else {
+                alert("Sorry! Your browser can't support Local storage!");
+            }
+        });
+
+        pdfMake.fonts = {
+            THSarabun: {
+                normal: 'THSarabun.ttf',
+                bold: 'THSarabun-Bold.ttf',
+                italics: 'THSarabun-Italic.ttf',
+                bolditalics: 'THSarabun-BoldItalic.ttf'
+            }
+        }
+
+        $(document).ready(function () {
+            $('.bgloading').css('display', 'none');
+            $('#tbhead').text('รายชื่อนักศึกษาในวิชา' + sessionStorage.SUBJECT_NAME);
+            //$('#teacherSelect').append($("<option></option>").attr("value",localStorage.TEACHER_ID).text(localStorage.NAME)); 
+            var myTable = $('#dataTable').DataTable({
+                dom: 'Bfrtip',
+                destroy: true,
+                "processing": true,
+                "ordering": true,
+                select: {
+                    style: 'multi'
+                },
+                "ajax": {
+                    "url": "controller/getStudentInclass.php?id=" + sessionStorage.SUBJECT_ID,
+                    "type": "GET"
+                },
+                "columns": [
+                    { "data": 'CLASS_ID', "visible": false },
+                    { "data": 'STUDENT_CODE' },
+                    { "data": 'NAME' },
+                ],
+                buttons: [
+                    { "extend": 'copy', "text": 'Copy', "className": 'btn btn-primary btn-sm' },
+                    { "extend": 'csv', "text": 'CSV', "className": 'btn btn-danger btn-sm' },
+                    { "extend": 'excel', "text": 'Excel', "className": 'btn btn-success btn-sm' },
+                    { // กำหนดพิเศษเฉพาะปุ่ม pdf
+                        "extend": 'pdf', // ปุ่มสร้าง pdf ไฟล์
+                        "text": 'PDF', // ข้อความที่แสดง
+                        "className": 'btn btn-warning btn-sm',
+                        "pageSize": 'A4',   // ขนาดหน้ากระดาษเป็น A4            
+                        "customize": function (doc) { // ส่วนกำหนดเพิ่มเติม ส่วนนี้จะใช้จัดการกับ pdfmake
+                            // กำหนด style หลัก
+                            doc.defaultStyle = {
+                                font: 'THSarabun',
+                                fontSize: 16
+                            };
+                        }
+                    },
+                    { "extend": 'print', "text": 'Print', "className": 'btn btn-default btn-sm' }
+                ]
+            });
+
+            $('#dateTime').text(Date());
+
+            var selectTable = $('#selectTable').DataTable({
+                destroy: true,
+                "processing": true,
+                "ordering": true,
+                select: {
+                    style: 'multi'
+                },
+                "searching": false,
+                "ajax": {
+                    "url": "controller/searchStudent.php?param=" + $('#studentsearch').val(),
+                    "type": "GET"
+                },
+                "columns": [
+                    { "data": 'STUDEN_ID', "visible": false },
+                    { "data": 'STUDEN_CODE' },
+                    { "data": 'NAME' },
+                ]
+            });
+
+            $('#searchform').submit(function (e) {
+                e.preventDefault();
+                $('#selectTable').DataTable({
+                    destroy: true,
+                    "processing": true,
+                    "ordering": true,
+                    select: {
+                        style: 'multi'
+                    },
+                    "searching": false,
+                    "ajax": {
+                        "url": "controller/searchStudent.php?param=" + $('#studentsearch').val(),
+                        "type": "GET"
+                    },
+                    "columns": [
+                        { "data": 'STUDEN_ID', "visible": false },
+                        { "data": 'STUDEN_CODE' },
+                        { "data": 'NAME' },
+                    ]
+                });
+            });
+
+            $('#btnLogout').click(function () {
+                localStorage.clear();
+                window.location.replace("login.html");
+            });
+
+            $('#dataTable tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $('#btnDelete').prop('disabled', true);
+                }
+                else {
+                    $('#btnDelete').prop('disabled', false);
+                }
+            });
+
+            $('#btnAdd').click(function () {
+                sessionStorage.manage = "add";
+                $('#manageModalLabel').text('เพิ่มนักศึกษา');
+                $('#manageModal').modal('show');
+            });
+
+            $('#btnDelete').click(function () {
+                swal({
+                    title: "ยืนยันการลบ?",
+                    text: "คุณต้องการลบข้อมูลรายนักศึกษาที่เลือก ใช่หรือไม่?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $('.bgloading').css('display', 'block');
+                            $.post("controller/deleteStudentInclass.php", { SUBJECT_ID: sessionStorage.SUBJECT_ID, data: GetStudentSelect() },
+                                function (data, status) {
+                                    //alert("Data: " + data + "\nStatus: " + status);
+                                    if (data === "Success") {
+                                        $('.bgloading').css('display', 'none');
+                                        swal("ลบข้อมูลสำเร็จ!", "ลบข้อมูลรายนักศึกษาสำเร็จ.", "success")
+                                            .then((value) => {
+                                                location.reload();
+                                            });
+                                    } else {
+                                        $('.bgloading').css('display', 'none');
+                                        swal("ไม่สามารถลบข้อมูลได้!", "Error : " + data, "error");
+                                    }
+                                });
+                        } else {
+                            swal("ยกเลิกการลบข้อมูล!");
+                        }
+                    });
+            });
+
+            $('#btnSave').click(function (e) {
+                e.preventDefault();
+                //alert("seved");
+                $('.bgloading').css('display', 'block');
+                $('#manageModal').modal('hide');
+
+                if (sessionStorage.manage === "add") {
+                    $.post("controller/addStudentToClass.php", { SUBJECT_ID: sessionStorage.SUBJECT_ID, data: GetDataInTable() },
+                        function (data, status) {
+                            //alert("Data: " + data + "\nStatus: " + status);
+                            if (data === "Success") {
+                                $('.bgloading').css('display', 'none');
+                                swal("บันทึกข้อมูลสำเร็จ!", "บันทึกข้อมูลนักศึกษาสำเร็จ.", "success")
+                                    .then((value) => {
+                                        location.reload();
+                                    });
+                            } else {
+                                $('.bgloading').css('display', 'none');
+                                swal("ไม่สามารถบันทึกข้อมูลได้!", "Error : " + data, "error")
+                                    .then((value) => {
+                                        $('#manageModal').modal('show');
+                                    });
+                            }
+                        });
+                } else {
+                    swal("Session Error!", "Not found Manage type", "error");
+                }
+            });
+            
+            function GetDataInTable() {
+                var table = $('#selectTable').DataTable();
+                var d = [];
+                table.rows('.selected').every(function () {
+                    d.push(this.data());
+                });
+                return d;
+            }
+
+            function GetStudentSelect() {
+                var table = $('#dataTable').DataTable();
+                var d = [];
+                table.rows('.selected').every(function () {
+                    d.push(this.data());
+                });
+                return d;
+            }
+        });
+    </script>
+</body>
+
+</html>

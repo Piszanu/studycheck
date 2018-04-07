@@ -1,8 +1,10 @@
 <?php
 require_once("mysqlConn.php");
 
-$sql = "SELECT subject.SUBJECT_ID, subject.SUBJECT_NAME, subject.SUBJECT_CODE, subject.TEACHER_CODE, teacher.NAME 
-    FROM subject LEFT JOIN teacher ON teacher.TEACHER_ID = subject.TEACHER_CODE WHERE subject.TEACHER_CODE = '". $_GET['TEACHER_ID'] ."'";
+$sql = "SELECT class_student.CLASS_ID, class_student.STUDENT_CODE, studen_info.NAME
+    FROM class_student
+    LEFT JOIN studen_info ON studen_info.STUDEN_CODE = class_student.STUDENT_CODE
+    WHERE class_student.CLASS_ID = '".$_GET['id']."'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

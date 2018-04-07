@@ -1,8 +1,7 @@
 <?php
 require_once("mysqlConn.php");
 
-$sql = "SELECT subject.SUBJECT_ID, subject.SUBJECT_NAME, subject.SUBJECT_CODE, subject.TEACHER_CODE, teacher.NAME 
-    FROM subject LEFT JOIN teacher ON teacher.TEACHER_ID = subject.TEACHER_CODE WHERE subject.TEACHER_CODE = '". $_GET['TEACHER_ID'] ."'";
+$sql = "SELECT `STUDEN_ID`, `STUDEN_CODE`,`NAME` FROM `studen_info` WHERE `STUDEN_CODE` LIKE '%".$_GET['param']."%' OR `NAME` LIKE '%".$_GET['param']."%'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
