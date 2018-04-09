@@ -1,12 +1,14 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . "/studycheck/controller/" ."mysqlConn.php");
-$teacherid = $_POST["teacherid"];
+$classid = $_POST["classid"];
 $date = $_POST["date"];
 
-$sql = "SELECT subject.SUBJECT_ID, subject.SUBJECT_CODE, subject.SUBJECT_NAME, class.CLASS_ID, class.DATE
-FROM subject
-LEFT JOIN class ON class.SUBJECT_ID = subject.SUBJECT_CODE
-WHERE subject.TEACHER_CODE = '".$teacherid."' AND class.DATE = '".$date."'";
+$sql = "SELECT class_student.STUDENT_CODE, studen_info.NAME, subject.SUBJECT_NAME
+FROM class_student 
+LEFT JOIN studen_info ON studen_info.STUDEN_CODE = class_student.STUDENT_CODE
+LEFT JOIN subject ON subject.SUBJECT_ID = class_student.CLASS_ID
+LEFT JOIN class on class.SUBJECT_ID = subject.SUBJECT_CODE
+WHERE class.CLASS_ID = '".$classid."' AND class.DATE = '".$date."'";
  
 $result = $conn->query($sql);
 $resultArray = array();
@@ -18,7 +20,7 @@ if ($result->num_rows > 0) {
     echo json_encode($resultArray);
 } else {
     header ('Content-type: text/html; charset=utf-8');
-    echo "No Subject.";
+    echo "No Student.";
 }
 $conn->close();
 ?>
