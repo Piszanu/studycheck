@@ -3,11 +3,12 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/studycheck/controller/" ."mysqlConn.p
 $classid = $_POST["classid"];
 $date = $_POST["date"];
 
-$sql = "SELECT class_student.STUDENT_CODE, studen_info.NAME, subject.SUBJECT_NAME
+$sql = "SELECT class_student.STUDENT_CODE, studen_info.NAME, subject.SUBJECT_NAME, class_check.STATUS
 FROM class_student 
 LEFT JOIN studen_info ON studen_info.STUDEN_CODE = class_student.STUDENT_CODE
 LEFT JOIN subject ON subject.SUBJECT_ID = class_student.CLASS_ID
-LEFT JOIN class on class.SUBJECT_ID = subject.SUBJECT_CODE
+LEFT JOIN class ON class.SUBJECT_ID = subject.SUBJECT_CODE
+LEFT JOIN class_check ON class_check.STUDENT_ID = studen_info.STUDEN_CODE
 WHERE class.CLASS_ID = '".$classid."' AND class.DATE = '".$date."'";
  
 $result = $conn->query($sql);
