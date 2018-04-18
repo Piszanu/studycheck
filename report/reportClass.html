@@ -256,14 +256,6 @@
                         <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>CLASS_ID</th>
-                                    <th>รหัสวิชา</th>
-                                    <th>ชื่อวิชา</th>
-                                    <th>TEACHER_CODE</th>
-                                    <th>อาจารย์ผู้สอน</th>
-                                    <th>วันที่</th>
-                                    <th>เวลา</th>
-                                    <th>สถานะ</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -325,7 +317,6 @@
         <!-- Custom scripts for all pages-->
         <script src="..//js/sb-admin.min.js"></script>
         <!-- Custom scripts for this page-->
-        <script src="..//js/sb-admin-datatables.min.js"></script>
         <script src="..//vendor/sweetalert/sweetalert.min.js"></script>
         <!--<script src="js/sb-admin-charts.min.js"></script>-->
     </div>
@@ -354,51 +345,50 @@
         }
 
         $(document).ready(function () {
-            $('.bgloading').css('display', 'none');
-            $('#teacherSelect').append($("<option></option>").attr("value", localStorage.TEACHER_ID).text(localStorage.NAME));
-            var myTable = $('#dataTable').DataTable({
-                destroy: true,
-                "processing": true,
-                "ordering": true,
-                "info": true,
-                "scrollX": false,
-                select: true,
-                lengthChange: false,
-                "dom": 'Bfrtip',
-                "ajax": {
-                    "url": "..//controller/getClass.php",
-                    "type": "GET"
-                },
-                "columns": [
-                    { "data": 'CLASS_ID', "visible": false },
-                    { "data": 'SUBJECT_CODE' },
-                    { "data": 'SUBJECT_NAME' },
-                    { "data": 'TEACHER_CODE', "visible": false },
-                    { "data": 'NAME' },
-                    { "data": 'DATE' },
-                    { "data": 'TIME' },
-                    { "data": 'STATUS' },
-                ],
-                buttons: [
-                    { "extend": 'copy', "text": 'Copy', "className": 'btn btn-primary btn-sm' },
-                    { "extend": 'csv', "text": 'CSV', "className": 'btn btn-danger btn-sm' },
-                    { "extend": 'excel', "text": 'Excel', "className": 'btn btn-success btn-sm' },
-                    { // กำหนดพิเศษเฉพาะปุ่ม pdf
-                        "extend": 'pdf', // ปุ่มสร้าง pdf ไฟล์
-                        "text": 'PDF', // ข้อความที่แสดง
-                        "className": 'btn btn-warning btn-sm',
-                        "pageSize": 'A4',   // ขนาดหน้ากระดาษเป็น A4            
-                        "customize": function (doc) { // ส่วนกำหนดเพิ่มเติม ส่วนนี้จะใช้จัดการกับ pdfmake
-                            // กำหนด style หลัก
-                            doc.defaultStyle = {
-                                font: 'THSarabun',
-                                fontSize: 16
-                            };
-                        }
-                    },
-                    { "extend": 'print', "text": 'Print', "className": 'btn btn-default btn-sm' }
-                ]
+            var ajaxData;
+            $.post("..//controller/getEnrollment.php", { 
+                subjectcode: sessionStorage.subjectcode,
+                subjectid: sessionStorage.subjectid 
+                }, function (data, status) {
+                ajaxData = JSON.parse(data);
+                
+                $.each(ajaxData.columns, function (index, value) {
+                    $('#dataTable thead tr').append('<th>' + value['name'] + '</th>');
+                });
+
+                //$('#dateTime').text(ajaxData.data);
+
+                var myTable = $('#dataTable').DataTable({
+                    dom: 'Bfrtip',
+                    destroy: true,
+                    "processing": true,
+                    "ordering": true,
+                    select: true,
+                    "columns": ajaxData.columns,
+                    "data": ajaxData.data,
+                    buttons: [
+                        { "extend": 'copy', "text": 'Copy', "className": 'btn btn-primary btn-sm' },
+                        { "extend": 'csv', "text": 'CSV', "className": 'btn btn-danger btn-sm' },
+                        { "extend": 'excel', "text": 'Excel', "className": 'btn btn-success btn-sm' },
+                        { // กำหนดพิเศษเฉพาะปุ่ม pdf
+                            "extend": 'pdf', // ปุ่มสร้าง pdf ไฟล์
+                            "text": 'PDF', // ข้อความที่แสดง
+                            "className": 'btn btn-warning btn-sm',
+                            "pageSize": 'A4',   // ขนาดหน้ากระดาษเป็น A4            
+                            "customize": function (doc) { // ส่วนกำหนดเพิ่มเติม ส่วนนี้จะใช้จัดการกับ pdfmake
+                                // กำหนด style หลัก
+                                doc.defaultStyle = {
+                                    font: 'THSarabun',
+                                    fontSize: 16
+                                };
+                            }
+                        },
+                        { "extend": 'print', "text": 'Print', "className": 'btn btn-default btn-sm' }
+                    ]
+                });
             });
+
+            $('.bgloading').css('display', 'none');
 
             $('#dateTime').text(Date());
 

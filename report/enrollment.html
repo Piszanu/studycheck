@@ -260,14 +260,11 @@
                         <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>CLASS_ID</th>
+                                    <th>Subject ID</th>
                                     <th>รหัสวิชา</th>
                                     <th>ชื่อวิชา</th>
-                                    <th>TEACHER_CODE</th>
                                     <th>อาจารย์ผู้สอน</th>
-                                    <th>วันที่</th>
-                                    <th>เวลา</th>
-                                    <th>สถานะ</th>
+                                    <th>Teacher ID</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -369,18 +366,15 @@
                 select: true,
                 lengthChange: false,
                 "ajax": {
-                    "url": "..//controller/getClass.php",
+                    "url": "..//controller/getSubject.php?TEACHER_ID=" + localStorage.TEACHER_ID,
                     "type": "GET"
                 },
                 "columns": [
-                    { "data": 'CLASS_ID', "visible": false },
+                    { "data": 'SUBJECT_ID', "visible": false },
                     { "data": 'SUBJECT_CODE' },
                     { "data": 'SUBJECT_NAME' },
-                    { "data": 'TEACHER_CODE', "visible": false },
-                    { "data": 'NAME' },
-                    { "data": 'DATE' },
-                    { "data": 'TIME' },
-                    { "data": 'STATUS' },
+                    { "data": 'NAME', "visible": false },
+                    { "data": 'TEACHER_CODE', "visible": false }
                 ]
             });
 
@@ -404,7 +398,8 @@
             });
 
             $('#btnCheck').click(function () {
-                sessionStorage.classid = myTable.rows('.selected').data()[0]['CLASS_ID'];
+                sessionStorage.subjectcode = myTable.rows('.selected').data()[0]['SUBJECT_CODE'];
+                sessionStorage.subjectid = myTable.rows('.selected').data()[0]['SUBJECT_ID'];
                 window.location.href = "reportClass.html";
             });
         });
